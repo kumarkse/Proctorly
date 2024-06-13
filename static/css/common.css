@@ -81,7 +81,7 @@ nav {
 .nav__socials a:hover {
   color: var(--white);
   background-color: var(--primary-color);
-  border-radius: 10rem 2rem;
+  border-radius: 0.5rem;
   font-size: 1.3rem;
 }
 

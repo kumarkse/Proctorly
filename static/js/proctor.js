@@ -2,20 +2,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('video');
     const questionInput = document.getElementById('question');
     const answerInput = document.getElementById('answer');
-    const nextButton = document.getElementById('nextButton');
+    const start_stop = document.getElementById('start_stop');
 
     let stream = null;
     let intervalId = null;
 
     // Start button click event handler
-    nextButton.addEventListener('click', function() {
+    start_stop.addEventListener('click', function() {
         if (intervalId) {
             clearInterval(intervalId);
             intervalId = null;
-            nextButton.textContent = 'Start';
+            start_stop.textContent = 'Start';
         } else {
             startCapture();
-            nextButton.textContent = 'Stop';
+            start_stop.textContent = 'Stop';
         }
     });
 
