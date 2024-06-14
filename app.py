@@ -1,6 +1,5 @@
 from flask import Flask,render_template,request,jsonify
 import base64,os
-import streamlit as st
 from datetime import datetime
 from face_dtect import count_faces
 from llm import askQA
