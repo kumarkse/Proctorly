@@ -46,8 +46,8 @@
     margin-top: 20px;
 }
 .upper{
-    background-color: rgb(113, 113, 255);
-    color: white;
+    /* background-color: rgb(113, 113, 255); */
+    /* color: white; */
     border-radius: 1.5rem;
     width :100%;
     font-size: xx-large;
@@ -62,7 +62,7 @@
 }
 
 .lower{
-    border: 15px solid rgb(113, 113, 255) ;
+    border: 2px solid var(--blue3) ;
     width :100%;
     font-size: xx-large;
     font-weight:bold;
@@ -80,10 +80,10 @@
     font-weight: bold;
     font-family: "Roboto Slab", serif;
     font-optical-sizing: auto;
-    font-weight: 700;
+    font-weight: 500;
     font-style: normal;
 
-    color: #242935;
+    color: gray;
 }
 .btn button{
     background-color: var(--blue3);
@@ -128,6 +128,65 @@
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
+}
+
+/*-----------------------------------*/
+
+
+
+#popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#popup-content {
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+    
+    max-width: 600px; /* Maximum width for the popup */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}
+
+#popup-content h2 {
+    margin-top: 0;
+}
+
+#popup-content p {
+    margin-bottom: 20px;
+}
+
+#popup-content button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#popup-content #start-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#popup-content #cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+#main-content {
+    display: none;
+    padding: 20px;
 }
 
 

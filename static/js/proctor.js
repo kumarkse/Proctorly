@@ -2,20 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('video');
     const questionInput = document.getElementById('question');
     const answerInput = document.getElementById('answer');
-    const start_stop = document.getElementById('start_stop');
+    const start = document.getElementById('start-button');
+
 
     let stream = null;
     let intervalId = null;
-
     // Start button click event handler
-    start_stop.addEventListener('click', function() {
+    start.addEventListener('click', function() {
+        
         if (intervalId) {
             clearInterval(intervalId);
             intervalId = null;
-            start_stop.textContent = 'Start';
+            start.textContent = 'Start';
         } else {
             startCapture();
-            start_stop.textContent = 'Stop';
+            start.textContent = 'Stop';
         }
     });
 
@@ -75,4 +76,23 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error uploading photo:', error);
         });
     }
+});
+/*-------------------------------------------------------------------- */
+
+
+// @todo Add an SVG grain texture to smooth out the gradient steps.
+document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('popup');
+    const mainContent = document.getElementById('main-content');
+    const startButton = document.getElementById('start-button');
+    const cancelButton = document.getElementById('cancel-button');
+
+    startButton.addEventListener('click', function() {
+        popup.style.display = 'none';
+        mainContent.style.display = 'block';
+    });
+
+    cancelButton.addEventListener('click', function() {
+        window.location.href = '/';
+    });
 });
