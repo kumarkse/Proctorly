@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 /*-------------------------------------------------------------------- */
-
+//  when the pop comes to start the test
 
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popup');
@@ -94,10 +94,23 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelButton.addEventListener('click', function() {
         window.location.href = '/';
     });
+
+
+    startButton.addEventListener('click', function() {
+        fetch('/get_next_question')
+            .then(response => response.json())
+            .then(data => {
+                const questionContainer = document.getElementById('question');
+                questionContainer.innerText = data.question;
+            })
+            .catch(error => console.error('Error:', error));
+    });
 });
 
 
 /***************************************************/
+
+//  when the pop comes to exit the test
 
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popup-close');
@@ -118,5 +131,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     exitbtn.addEventListener('click',function(){
         window.location.href = '/';
+    });
+});
+
+//---------------------------------------------------------------------------
+
+// rendering next question
+
+document.addEventListener('DOMContentLoaded', function() {
+    const nextButton = document.getElementById('nextButton');
+    const startButton = document.getElementById('start-button');
+
+
+
+    // startButton.addEventListener('click', function() {
+    //     fetch('/get_next_question')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             const questionContainer = document.getElementById('question');
+    //             questionContainer.innerText = data.question;
+    //         })
+    //         .catch(error => console.error('Error:', error));
+    // });
+
+    nextButton.addEventListener('click',function(){
+        fetch('/get_next_question')
+            .then(response => response.json())
+            .then(data => {
+                const questionContainer = document.getElementById('question');
+                questionContainer.innerText = data.question;
+            })
+            .catch(error => console.error('Error:', error));
     })
 });

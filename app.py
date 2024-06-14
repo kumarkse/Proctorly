@@ -3,6 +3,7 @@ import base64,os
 import streamlit as st
 from datetime import datetime
 from face_dtect import count_faces
+from llm import askQA
 
 app  = Flask(__name__)
 
@@ -14,7 +15,8 @@ def hello():
 @app.route("/proctor")
 def helloproctor():
     return render_template("proctor.html")
-counter=0
+
+ques_index=0
 
 @app.route('/upload_photo', methods=['POST'])
 def upload_photo():
@@ -47,17 +49,28 @@ def upload_photo():
         
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')
         filename = f'uploaded_image_{timestamp}.jpg'
-        # Save image file to the specified directory
         try:
             with open(os.path.join(save_dir, filename), 'wb') as f:
                 f.write(img_binary)
         except Exception as e:
             return jsonify({'error': 'Failed to save image file'}), 500
 
-        # Optionally, you can respond with a success message
         return jsonify({'message': 'Photo uploaded and saved successfully', 'filename': filename}), 200
     else:
         return jsonify({'error': 'Invalid photo data URL'}), 400
+    
+
+@app.route('/get_next_question')
+def get_next_question():
+    global ques_index
+
+    # Get the next question
+    question = askQA(ques_index)
+
+    # Move to the next question for the next request
+    ques_index = (ques_index + 1) % 5
+
+    return jsonify({"question": question})
 
 
 if __name__ == "__main__":
