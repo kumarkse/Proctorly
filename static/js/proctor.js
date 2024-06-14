@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
 /*-------------------------------------------------------------------- */
 
 
-// @todo Add an SVG grain texture to smooth out the gradient steps.
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popup');
     const mainContent = document.getElementById('main-content');
@@ -95,4 +94,29 @@ document.addEventListener('DOMContentLoaded', function() {
     cancelButton.addEventListener('click', function() {
         window.location.href = '/';
     });
+});
+
+
+/***************************************************/
+
+document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('popup-close');
+    const mainContent = document.getElementById('main-content');
+    const exitbtn = document.getElementById('exit');
+    const cancelButton = document.getElementById('stay');
+    
+    const endbtn = document.getElementById('end');
+
+    endbtn.addEventListener('click', function() {
+        popup.style.display = 'flex';
+        // mainContent.style.display = 'none';
+    });
+
+    cancelButton.addEventListener('click', function() {
+        popup.style.display="none";
+    });
+
+    exitbtn.addEventListener('click',function(){
+        window.location.href = '/';
+    })
 });
