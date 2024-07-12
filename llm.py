@@ -6,3 +6,27 @@ def askQA(index):
            "Mauris eu ex ut neque imperdiet efficitur a a magna. Quisque nec odio sit amet velit ullamcorper condimentum. Nulla ac nunc orci. Sed pretium eros eget nulla vestibulum, in varius dui posuere."
            ]
     return ques[index]
+
+
+# you write all your code here
+
+# just make sure that you have the above askQA function always so that it can be fetched
+
+# now
+
+# if u want question , u have it in the this file itself
+
+# for user answer
+
+from answerfile import getans
+
+
+# this will return list of answer
+
+
+# now u will have question , userans , and the actual answer will also be generated in this file itself.
+
+# make sure to get the final stats in to an array  and a fucntion that will return it when called.
+# so that i can render it on stats page.
+
+# thanks.
