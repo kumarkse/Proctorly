@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webcam Photo Capture</title>
-  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/proctor.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}">
 </head>
 
@@ -17,7 +17,7 @@
     </div>
     <ul class="nav__socials">
       <li>
-        <a href="#">Home</a>
+        <a href="/">Home</a>
       </li>
       <li>
         <a href="#">About Us</a>
@@ -27,8 +27,15 @@
       </li>
     </ul>
   </nav>
-  
+
   <div id="points"></div>
+  <div id="container">
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</div>
 
   <script src="{{ url_for('static', filename='js/stats.js') }}"></script>
 </body>

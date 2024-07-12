@@ -3,17 +3,17 @@ import base64,os
 from datetime import datetime
 from face_dtect import count_faces
 from llm import askQA
+from answerfile import reset,insert,getans
 
 ques_index=0
 app  = Flask(__name__)
 
-answer = []
 
 @app.route("/")
 def hello():
     global ques_index
     ques_index=0
-    answer.clear()
+    reset()
     return render_template("home.html")
 
 
@@ -27,6 +27,7 @@ def showstats():
 
 @app.route("/getstats",methods=['GET'])
 def givestats():
+    answer = getans()
     return jsonify(answer)
 
 
@@ -72,21 +73,16 @@ def upload_photo():
 @app.route('/get_next_question')
 def get_next_question():
     global ques_index
-
-    # Get the next question
     question = askQA(ques_index)
-
-    # Move to the next question for the next request
     ques_index = ques_index + 1
-
     return jsonify({"question": question})
 
 @app.route('/getanswer', methods=['POST'])
 def receive_text():
     data = request.get_json()
     text = data.get('text')
-    answer.append(text)
-    print(answer)
+    insert(text)
+    print(getans())
     return jsonify({'message': 'Text received successfully!'})
 
 
