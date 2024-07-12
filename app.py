@@ -4,10 +4,16 @@ from datetime import datetime
 from face_dtect import count_faces
 from llm import askQA
 
+ques_index=0
 app  = Flask(__name__)
+
+answer = []
 
 @app.route("/")
 def hello():
+    global ques_index
+    ques_index=0
+    answer.clear()
     return render_template("home.html")
 
 
@@ -15,14 +21,18 @@ def hello():
 def helloproctor():
     return render_template("proctor.html")
 
-ques_index=0
+@app.route("/stats")
+def showstats():
+    return render_template("stats.html")
+
+@app.route("/getstats",methods=['GET'])
+def givestats():
+    return jsonify(answer)
+
 
 @app.route('/upload_photo', methods=['POST'])
 def upload_photo():
-    # Get JSON data from the request
     data = request.get_json()
-
-    # Extract photo data URL from JSON
     photo_data_url = data.get('photo')
     
 
@@ -67,7 +77,20 @@ def get_next_question():
     question = askQA(ques_index)
 
     # Move to the next question for the next request
-    ques_index = (ques_index + 1) % 5
+    ques_index = ques_index + 1
 
     return jsonify({"question": question})
 
+@app.route('/getanswer', methods=['POST'])
+def receive_text():
+    data = request.get_json()
+    text = data.get('text')
+    answer.append(text)
+    print(answer)
+    return jsonify({'message': 'Text received successfully!'})
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

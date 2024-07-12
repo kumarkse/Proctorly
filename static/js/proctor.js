@@ -1,9 +1,9 @@
+ques=0;
 document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('video');
     const questionInput = document.getElementById('question');
     const answerInput = document.getElementById('answer');
     const start = document.getElementById('start-button');
-
 
     let stream = null;
     let intervalId = null;
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.getElementById('nextButton');
     const startButton = document.getElementById('start-button');
-
+    const text = document.getElementById('answer');
 
 
     // startButton.addEventListener('click', function() {
@@ -155,12 +155,49 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 
     nextButton.addEventListener('click',function(){
-        fetch('/get_next_question')
+        sendText();
+
+        if(nextButton.textContent=="Submit")
+            {
+                window.location.href = '/stats';
+            }
+        else
+        {fetch('/get_next_question')
             .then(response => response.json())
             .then(data => {
+
+                if(ques==4)
+                    {
+                        nextButton.textContent="Submit";
+                    }
                 const questionContainer = document.getElementById('question');
+
                 questionContainer.innerText = data.question;
             })
             .catch(error => console.error('Error:', error));
+        ques++;
+    
+        text.value="";}
     })
+    
 });
+
+// sending current answer
+function sendText() {
+    const text = document.getElementById('answer').value;
+
+    fetch('/getanswer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
