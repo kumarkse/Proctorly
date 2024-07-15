@@ -82,9 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const popup = document.getElementById('popup');
+    const subject_block = document.getElementById('get_subject_block');
     const mainContent = document.getElementById('main-content');
     const startButton = document.getElementById('start-button');
     const cancelButton = document.getElementById('cancel-button');
+    const input_subject_Button = document.getElementById('input_subject_btn');
+    const loader = document.getElementById('loading');
+
+ 
+    input_subject_Button.addEventListener( 'click' , function(){
+        sendSubject();
+        subject_block.style.display = 'none';
+        loader.style.display = 'flex';
+    })
 
     startButton.addEventListener('click', function() {
         popup.style.display = 'none';
@@ -200,4 +210,52 @@ function sendText() {
     .catch((error) => {
         console.error('Error:', error);
     });
+}
+ 
+//  sending the subject to llm file
+function sendSubject(){
+    
+    const popup = document.getElementById('popup');
+    const subject_block = document.getElementById('get_subject_block');
+    const mainContent = document.getElementById('main-content');
+    const startButton = document.getElementById('start-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const input_subject_Button = document.getElementById('input_subject_btn');
+    const loader = document.getElementById('loading');
+    const text = document.getElementById('input_subject').value;
+
+    fetch('/getsubject', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    fetch('/getques', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        popup.style.display='flex';
+        loader.style.display='none';
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+
+   
 }
